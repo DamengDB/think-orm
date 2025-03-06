@@ -55,7 +55,7 @@ class ModelOneToOneTest extends TestCase
 
         $user          = new UserModel();
         $user->name    = 'thinkphp';
-        $user->profile = new ProfileModel(['email' => $email, 'nickname' => $nickname]);
+        $user->profile = new ProfileModel(['email' => $email, 'nickname' => $nickname, 'user_id' => 1]);
         $user->together(['profile'])->save();
 
         $userID = $user->id;
@@ -90,7 +90,7 @@ class ModelOneToOneTest extends TestCase
         $profile           = new ProfileModel();
         $profile->email    = 'test@thinkphp.cn';
         $profile->nickname = 'test';
-        $profile->user_id  = $user->id;
+        $profile->user_id  = 1;
         $profile->save();
 
         // 测试hasOne关联
@@ -116,14 +116,14 @@ class ModelOneToOneTest extends TestCase
         $user2->save(['name' => 'user2']);
 
         $profile1 = new ProfileModel([
-            'user_id'  => $user1->id,
+            'user_id'  => 1,
             'email'    => 'user1@thinkphp.cn',
             'nickname' => 'nickname1',
         ]);
         $profile1->save();
 
         $profile2 = new ProfileModel([
-            'user_id'  => $user2->id,
+            'user_id'  => 2,
             'email'    => 'user2@thinkphp.cn',
             'nickname' => 'nickname2',
         ]);
@@ -151,7 +151,7 @@ class ModelOneToOneTest extends TestCase
         // 测试关联新增
         $user          = new UserModel();
         $user->name    = 'newuser';
-        $user->profile = new ProfileModel(['email' => 'new@thinkphp.cn', 'nickname' => 'newnick']);
+        $user->profile = new ProfileModel(['email' => 'new@thinkphp.cn', 'nickname' => 'newnick', 'user_id' => 2]);
         $user->together(['profile'])->save();
 
         $this->assertNotNull($user->profile);
