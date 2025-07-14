@@ -205,7 +205,7 @@ abstract class Model implements JsonSerializable, ArrayAccess, Arrayable, Jsonab
         self::$weakMap[$this][$name] = $value;
         if (property_exists($this, $name)) {
             $this->$name = $value;
-        }        
+        }
         return $this;
     }
 
@@ -632,7 +632,7 @@ abstract class Model implements JsonSerializable, ArrayAccess, Arrayable, Jsonab
         $model  = new static();
         if (!empty($suffix)) {
             $model->setSuffix($suffix);
-        }        
+        }
         $model->allowField($allowField)->exists(true)->save($data, $where, $refresh);
         return $model->fetchModel($model);
     }
